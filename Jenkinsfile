@@ -18,8 +18,9 @@ pipeline {
             steps {
                 echo "Pushing the image to docker hub"
                 withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'dockerpass', usernameVariable: 'docker')]){
+                sh "docker tag my-note-app raam2023/my-note-app:latest"
                 sh "docker login -u ${docker} -p ${dockerpass}"
-                sh "docker push raam2023/my-note-app:latest"
+                sh "docker push -t raam2023/my-note-app:latest"
                 }
             }
         }
